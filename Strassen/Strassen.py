@@ -17,15 +17,15 @@ class Strassen:
 
         if(dim <= 2**4): return numpy.matmul(A,B)
 
-        A11 = A[0:dim//2, 0:dim//2]#.copy()
-        A22 = A[dim//2:, dim//2:]#.copy()
-        A12 = A[0:dim//2, dim//2:]#.copy()
-        A21 = A[dim//2:, 0:dim//2]#.copy()
+        A11 = A[0:dim//2, 0:dim//2].view(dtype=A.dtype, type=numpy.matrix)
+        A22 = A[dim//2:, dim//2:].view(dtype=A.dtype, type=numpy.matrix)
+        A12 = A[0:dim//2, dim//2:].view(dtype=A.dtype, type=numpy.matrix)
+        A21 = A[dim//2:, 0:dim//2].view(dtype=A.dtype, type=numpy.matrix)
 
-        B11 = B[0:dim//2, 0:dim//2]#.copy()
-        B22 = B[dim//2:, dim//2:]#.copy()
-        B12 = B[0:dim//2, dim//2:]#.copy()
-        B21 = B[dim//2:, 0:dim//2]#.copy()
+        B11 = B[0:dim//2, 0:dim//2].view(dtype=B.dtype, type=numpy.matrix)
+        B22 = B[dim//2:, dim//2:].view(dtype=B.dtype, type=numpy.matrix)
+        B12 = B[0:dim//2, dim//2:].view(dtype=B.dtype, type=numpy.matrix)
+        B21 = B[dim//2:, 0:dim//2].view(dtype=B.dtype, type=numpy.matrix)
 
         M1 = Strassen.__StrassenAlgoMatMul(numpy.add(A11,A22),numpy.add(B11,B22))
         M2 = Strassen.__StrassenAlgoMatMul(numpy.add(A21,A22),B11)
